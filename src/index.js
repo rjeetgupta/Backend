@@ -54,7 +54,7 @@ const app = express();
 
 (async () => {
     try {
-        mongoose.connect(`${process.env.DATABASE_URL}/${DB_NAME}`)
+        await mongoose.connect(`${process.env.DATABASE_URL}/${DB_NAME}`)
         app.on("error", (error) => {
             console.error("error: ", error);
             throw error;
