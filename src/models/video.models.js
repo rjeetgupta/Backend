@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 import mongooseAggregatePaginate from 'mongoose-aggregate-paginate';
+// Help in writing mongoDB aggregations pipeline
 
 const videoSchema = new Schema(
     {
@@ -21,7 +22,7 @@ const videoSchema = new Schema(
             required: true
         },
         duration: {
-            type: Number,  
+            type: Number,  // cloudinary give the duration after upload the video
             required: true
         },
         views: {
@@ -43,5 +44,6 @@ const videoSchema = new Schema(
 )
 
 videoSchema.plugin(mongooseAggregatePaginate);
+// Used as a plugin to aggregate
 
 export const Video = mongoose.model("Video", videoSchema);

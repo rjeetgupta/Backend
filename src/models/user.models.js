@@ -12,7 +12,7 @@ const userSchema = new Schema(
             unique: true,
             lowercase: true,
             trim: true,
-            index: true
+            index: true // Used in searchable fields most of the time
         },
         email: {
             type: String,
@@ -53,12 +53,16 @@ const userSchema = new Schema(
     }
 )
 
+
+// Here pre is hook that is used to do something before save data into the database
+// and don't use arrow functions because they don't have access of current context(this keyword)
 userSchema.pre("save", async function (next) {
-    if (!this.isModified("password")) {
+    if (!this.isModified("password")) { // if not modified 
         return next();
     }
     this.password = await bcrypt.hash(this.password, 10)
     next();
+    // Here hash() is used to encrypt the password 
 })
 
 userSchema.methods.isPasswordCorrect = async function (password) {
