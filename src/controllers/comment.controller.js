@@ -17,7 +17,7 @@ const getVideoComments = asyncHandler(async (req, res) => {
         .skip((page - 1) * limit)
         .limit(parseInt(limit))
     
-    res.status(200).json(
+    return res.status(200).json(
         new ApiResponse(
             200,
             "Comments retrieved successfully",
@@ -50,7 +50,7 @@ const addComment = asyncHandler(async (req, res) => {
         userId
     })
 
-    res.status(201).json(
+    return res.status(201).json(
         new ApiResponse(
             201,
             "Comment added successfully",
@@ -86,7 +86,7 @@ const updateComment = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Comment not found");
     }
 
-    res.status(200).json(
+    return res.status(200).json(
         new ApiResponse(
             200,
             "Comment updated successfully",
@@ -114,7 +114,7 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Comment not found");
     }
 
-    res.status(200).json(
+    return res.status(200).json(
         new ApiResponse(
             200,
             "Comment deleted successfully",
